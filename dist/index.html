@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>todo-list</title>
-    <link rel="stylesheet" href="styles.css">
     <link
       href="https://unpkg.com/css.gg@2.0.0/icons/css/remove.css"
       rel="stylesheet"
@@ -15,19 +14,22 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <div class="container">
+    <div class="content">
         <header class="header">
             <img src='https://bscottnz.github.io/todo/img/logo.png' alt="logo">
         </header>
         <div class="main-flex">
             <aside class="aside">
-                <ul>
-                    <li class="hover">Home</li>
-                    <li class="hover">Today</li>
-                    <li class="hover">Week</li>
+                <ul class="projects">
+                    <li id='1'class="hover" data-id="1">Home</li>
+                    <li id='2' class="hover" data-id="2">Today</li>
+                    <li id='3' class="hover" data-id="3">Week</li>
                     <li>Projects</li>
                     <ul class="list-group">
                         <li class="hover">Uno</li>
@@ -37,28 +39,6 @@
                 </ul>
             </aside>
             <main class="main">
-                <div class="main-container">
-                    <div class="task-container">
-                        <div class="item-1"></div>
-                        <div class="item-2">
-                            <i class="small material-icons">mode_edit</i>
-                            <i class="small material-icons">info_outline</i>
-                            <i class="gg-remove"></i>
-                        </div>
-                    </div>
-                    <div class="task-container">
-                        <div class="item-1">
-                            <p>
-                                Querido paco
-                            </p>
-                        </div>
-                        <div class="item-2">
-                            <i class="small material-icons">mode_edit</i>
-                            <i class="small material-icons">info_outline</i>
-                            <i class="gg-remove"></i>
-                        </div>
-                    </div>
-                </div>
             </main>
         </div>
     </div>

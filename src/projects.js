@@ -48,9 +48,8 @@ let idCounter = 3;
 export const createProjects = (name) => {
     idCounter++;
     const newProject = document.createElement("li");
-    newProject.classList.add("proyecto");
+    newProject.classList.add("hover");
     newProject.textContent = name;
-    newProject.id = idCounter;
-    projects.push({ name: newProject.textContent, id: newProject.id, task: []});
+    projects.push({ name: newProject.textContent, id: idCounter, task: []});
     return newProject;
 }

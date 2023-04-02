@@ -22,7 +22,7 @@ body{
     color: #501f3a;
 }
 
-.container{
+.content{
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -71,6 +71,7 @@ body{
     width: 100%;
     justify-content: space-between;
     padding: 10px;
+    align-items: center;
     background-color: #e7e5e5;
     margin-top: 10px;
 }
@@ -84,13 +85,9 @@ body{
 
 .item-1{
     display: flex;
-    flex-wrap: wrap;
     width: 30%;
-}
-.item-1 > p{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    align-items: center;
+    margin-left: 30px;
 }
 
 .item-2{
@@ -99,6 +96,7 @@ body{
     justify-content: flex-end;
     width: 30%;
     gap: 15px;
+    margin-right: 15px;
 }
 
 .item-2 > i{
