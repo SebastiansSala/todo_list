@@ -49,7 +49,7 @@ export const renderProject = () => {
   const add = document.querySelector(".add");
   add.addEventListener("click", () => {
     const addTask = projectTasks(proyectoTasks);
-    addTask.createTask("hola", "quetal");
+    renderModals().renderTaskModal();
     renderProjects(proyectoTasks);
   });
 
