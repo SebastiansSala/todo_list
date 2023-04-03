@@ -33,12 +33,24 @@ body{
 
 
 .header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     position: fixed;
     background: #C38D9E;
     border-bottom: .2px solid #B9B9B9;
     width: 1200px;
     padding-left: 20px;
     height: 70px;
+}
+
+.header > i{
+    margin-right: 50px;
+    font-size: 50px;
+}
+
+.header > i:hover{
+    cursor: pointer;
 }
 
 .main-flex{

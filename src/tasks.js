@@ -1,18 +1,74 @@
-import { projects } from "./projects";
+export let projects = [
+  {
+      name: "All",
+      id: 1,
+      task: [
+        {
+          title: "Task 1",
+          desc: "Do something",
+        },
+        {
+          title: "Task 2",
+          desc: "Do something else",
+        },
+      ],
+    },
+    {
+      name: "Today",
+      id: 2,
+      task: [
+        {
+          title: "Task 1",
+          desc: "Do something",
+        },
+        {
+          title: "Task 3",
+          desc: "Do",
+        },
+      ],
+    },
+    {
+      name: "Week",
+      id: 3,
+      task: [
+        {
+          title: "Task 1",
+          desc: "Do something",
+        },
+        {
+          title: "Task 2",
+          desc: "Do something else",
+        },
+      ],
+    },
+    {
+      name: "Uno",
+      id: 4,
+      task: [
+      ],
+    }
+] 
 
 export const projectTasks = (proyecto) => {
   const proyectoId = parseInt(proyecto.id);
+  const currentProject = projects.find((project) => project.id === proyectoId);
 
   const createTask = (title, desc) => {
     const newTask = { title, desc };
-    const currentProject = projects.find((project) => project.id === proyectoId);
     currentProject.task.push(newTask);
   };
 
   const getTasks = () => {
-    const currentProject = projects.find((project) => project.id === proyectoId);
-    return currentProject.task;
+    if(currentProject){
+      return currentProject.task;
+    }
+    return [];
   };
 
-  return { createTask, getTasks };
+  const removeTask = (taskIndex) => {
+    currentProject.task.splice(taskIndex, 1);
+    console.log(projects)
+  }
+
+  return { createTask, getTasks, removeTask };
 };
