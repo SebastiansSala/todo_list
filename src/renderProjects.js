@@ -11,7 +11,7 @@ export const renderProject = () => {
   createProject.addEventListener("click", () => {
     renderModals().renderProjectModal();
   });
-  
+
   const proyecto = document.querySelector(".projects");
   proyecto.appendChild(createProject);
 
@@ -48,9 +48,6 @@ export const renderProject = () => {
 
   const add = document.querySelector(".add");
   add.addEventListener("click", () => {
-    const addTask = projectTasks(proyectoTasks);
-    renderModals().renderTaskModal();
-    renderProjects(proyectoTasks);
+    renderModals(proyectoTasks).renderTaskModal();
   });
-
 };

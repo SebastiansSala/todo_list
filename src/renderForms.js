@@ -1,6 +1,7 @@
 import { createProjects } from "./projects";
+import { projectTasks } from "./tasks";
 
-export const renderModals = () => {
+export const renderModals = (currentProject) => {
   const projectContainer = document.createElement("div");
   projectContainer.classList.add("button-container");
 
@@ -36,81 +37,98 @@ export const renderModals = () => {
     saveButton.addEventListener("click", () => {
       const nameInput = modalContainer.querySelector("#name");
       const name = nameInput.value;
-      const currentProject = createProjects(name);
-      projectContainer.appendChild(currentProject);
-      nameInput.value = "";
-      const projects = document.querySelector(".list-group");
-      projects.appendChild(currentProject);
-      modalContainer
-        .querySelector("form")
-        .addEventListener("submit", (event) => {
-          event.preventDefault();
-        });
+      if (!name) {
+        return;
+      } else {
+        const currentProject = createProjects(name);
+        projectContainer.appendChild(currentProject);
+        nameInput.value = "";
+        const projects = document.querySelector(".list-group");
+        projects.appendChild(currentProject);
+        modal.hide();
+      }
     });
-    const modal = new bootstrap.Modal(document.getElementById("myModal"), {});
+    const modal = new bootstrap.Modal(
+      modalContainer.querySelector("#myModal"),
+      {}
+    );
     modal.show();
   };
 
   const renderTaskModal = () => {
     const modalContainer = document.createElement("div");
     modalContainer.innerHTML = `
-    <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="miModalLabel">Crear tarea</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="titulo">Título</label>
-              <input type="text" class="form-control" id="titulo" placeholder="Ingresa el título de la tarea">
+      <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="miModalLabel">Crear tarea</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <div class="form-group">
-              <label for="descripcion">Descripción</label>
-              <textarea class="form-control" id="descripcion" rows="3" placeholder="Ingresa la descripción de la tarea"></textarea>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="titulo">Título</label>
+                  <input type="text" class="form-control" id="titulo" placeholder="Ingresa el título de la tarea">
+                </div>
+                <div class="form-group">
+                  <label for="descripcion">Descripción</label>
+                  <textarea class="form-control" id="descripcion" rows="3" placeholder="Ingresa la descripción de la tarea"></textarea>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="important">
+                  <label class="form-check-label" for="important">
+                    Important
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="not-important" checked>
+                  <label class="form-check-label" for="not-important">
+                    Not Important
+                  </label>
+                </div>
+              </form>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="importante" id="prioridad">
-              <label class="form-check-label" for="prioridad">
-                Importante
-              </label>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary" id="save-name">Guardar tarea</button>
             </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary" id = 'save-name'>Guardar tarea</button>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-          `;
+    `;
     document.body.appendChild(modalContainer);
+
     const saveButton = modalContainer.querySelector("#save-name");
     saveButton.addEventListener("click", () => {
       const titleInput = modalContainer.querySelector("#titulo");
       const descInput = modalContainer.querySelector("#descripcion");
-      const priorityInput = modalContainer.querySelector("#prioridad");
-      const title = nameInput.value;
-      const desc = nameInput.value;
-      const priority = priorityInput.checked;
-      console.log(title)
-      
-      titleInput.value = "";
-      descInput.value = "";
-      const projects = document.querySelector(".list-group");
-      projects.appendChild(currentProject);
-      modalContainer
-        .querySelector("form")
-        .addEventListener("submit", (event) => {
-          event.preventDefault();
-        });
+      const priorityInputImportant = modalContainer.querySelector("#important");
+      const priorityInputNotImportant =
+        modalContainer.querySelector("#not-important");
+      modalContainer.querySelector("#notImportant");
+      const title = titleInput.value;
+      const desc = descInput.value;
+      let priorityImportant = null;
+      if (priorityInputImportant) {
+        priorityImportant = priorityInputImportant.checked;
+      } else {
+        priorityImportant = priorityInputNotImportant.checked;
+      }
+      if (!title && !desc) {
+        return;
+      } else {
+        projectTasks(currentProject).createTask(title, desc);
+        modal.hide();
+      }
     });
-    const modal = new bootstrap.Modal(document.getElementById("miModal"), {});
+
+    const modal = new bootstrap.Modal(
+      modalContainer.querySelector("#miModal"),
+      {}
+    );
     modal.show();
   };
 
