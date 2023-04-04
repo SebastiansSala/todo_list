@@ -50,8 +50,8 @@ export let projects = [
 ] 
 
 export const projectTasks = (proyecto) => {
-  const proyectoId = parseInt(proyecto.id);
-  const currentProject = projects.find((project) => project.id === proyectoId);
+  const projectId = parseInt(proyecto.id);
+  const currentProject = projects.find((project) => project.id === projectId);
 
   const createTask = (title, desc) => {
     const newTask = { title, desc };

@@ -1,63 +1,9 @@
-import { createProjects } from "./projects";
 import { projectTasks } from "./tasks";
+import { renderProjects } from "./renderProjects";
 
-export const renderModals = (currentProject) => {
-  const projectContainer = document.createElement("div");
-  projectContainer.classList.add("button-container");
-
-  const renderProjectModal = () => {
-    const modalContainer = document.createElement("div");
-    modalContainer.innerHTML = `
-            <div class="modal" tabindex="-1" role="dialog" id="myModal">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">Ingresa tu nombre</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <form>
-                      <div class="form-group">
-                        <input type="text" class="form-control" id="name">
-                      </div>
-                    </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="save-name">Guardar</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          `;
-    document.body.appendChild(modalContainer);
-    const saveButton = modalContainer.querySelector("#save-name");
-    saveButton.addEventListener("click", () => {
-      const nameInput = modalContainer.querySelector("#name");
-      const name = nameInput.value;
-      if (!name) {
-        return;
-      } else {
-        const currentProject = createProjects(name);
-        projectContainer.appendChild(currentProject);
-        nameInput.value = "";
-        const projects = document.querySelector(".list-group");
-        projects.appendChild(currentProject);
-        modal.hide();
-      }
-    });
-    const modal = new bootstrap.Modal(
-      modalContainer.querySelector("#myModal"),
-      {}
-    );
-    modal.show();
-  };
-
-  const renderTaskModal = () => {
-    const modalContainer = document.createElement("div");
-    modalContainer.innerHTML = `
+export const renderTaskModal = (currentProject) => {
+  const modalContainer = document.createElement("div");
+  modalContainer.innerHTML = `
       <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -99,38 +45,37 @@ export const renderModals = (currentProject) => {
         </div>
       </div>
     `;
-    document.body.appendChild(modalContainer);
+  document.body.appendChild(modalContainer);
 
-    const saveButton = modalContainer.querySelector("#save-name");
-    saveButton.addEventListener("click", () => {
-      const titleInput = modalContainer.querySelector("#titulo");
-      const descInput = modalContainer.querySelector("#descripcion");
-      const priorityInputImportant = modalContainer.querySelector("#important");
-      const priorityInputNotImportant =
-        modalContainer.querySelector("#not-important");
-      modalContainer.querySelector("#notImportant");
-      const title = titleInput.value;
-      const desc = descInput.value;
-      let priorityImportant = null;
-      if (priorityInputImportant) {
-        priorityImportant = priorityInputImportant.checked;
-      } else {
-        priorityImportant = priorityInputNotImportant.checked;
-      }
-      if (!title && !desc) {
-        return;
-      } else {
-        projectTasks(currentProject).createTask(title, desc);
-        modal.hide();
-      }
-    });
+  const saveButton = modalContainer.querySelector("#save-name");
+  saveButton.addEventListener("click", () => {
+    const titleInput = modalContainer.querySelector("#titulo");
+    const descInput = modalContainer.querySelector("#descripcion");
+    const priorityInputImportant = modalContainer.querySelector("#important");
+    const priorityInputNotImportant =
+      modalContainer.querySelector("#not-important");
+    modalContainer.querySelector("#notImportant");
+    const title = titleInput.value;
+    const desc = descInput.value;
+    let priorityImportant = null;
+    if (priorityInputImportant) {
+      priorityImportant = priorityInputImportant.checked;
+    } else {
+      priorityImportant = priorityInputNotImportant.checked;
+    }
+    if (!title && !desc) {
+      return;
+    } else {
+      projectTasks(currentProject).createTask(title, desc);
+      renderProjects(currentProject);
+      modal.hide();
+    }
+  });
 
-    const modal = new bootstrap.Modal(
-      modalContainer.querySelector("#miModal"),
-      {}
-    );
-    modal.show();
-  };
-
-  return { renderProjectModal, renderTaskModal };
+  const modal = new bootstrap.Modal(
+    modalContainer.querySelector("#miModal"),
+    {}
+  );
+  modal.show();
 };
+
