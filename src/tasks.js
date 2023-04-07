@@ -4,7 +4,7 @@ export let projects = [
       id: 1,
       task: [
         {
-          title: "Task 1",
+          title: "Cosita buena",
           desc: "Do something",
         },
         {
@@ -34,10 +34,12 @@ export let projects = [
         {
           title: "Task 1",
           desc: "Do something",
+          importance: true,
         },
         {
           title: "Task 2",
           desc: "Do something else",
+          importance: false,
         },
       ],
     },
@@ -53,8 +55,8 @@ export const projectTasks = (proyecto) => {
   const projectId = parseInt(proyecto.id);
   const currentProject = projects.find((project) => project.id === projectId);
 
-  const createTask = (title, desc) => {
-    const newTask = { title, desc };
+  const createTask = (title, desc, importance, date) => {
+    const newTask = { title, desc, importance, date};
     currentProject.task.push(newTask);
   };
 
@@ -70,5 +72,9 @@ export const projectTasks = (proyecto) => {
     console.log(projects)
   }
 
-  return { createTask, getTasks, removeTask };
+  const watchTask = (taskIndex) => {
+    return currentProject.task[taskIndex];
+  }
+
+  return { createTask, getTasks, removeTask, watchTask };
 };

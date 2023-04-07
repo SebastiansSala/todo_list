@@ -14,8 +14,8 @@ export const renderTasks = (project) => {
     taskItem.textContent = `${task.title}`;
     const taskFeatures = document.createElement("div");
     taskFeatures.classList.add("item-2");
-    taskFeatures.innerHTML = `<i class="large material-icons">mode_edit</i>
-        <i class="large material-icons">info_outline</i>
+    taskFeatures.innerHTML = `<i class="large material-icons edit">mode_edit</i>
+        <i class="large material-icons watch">info_outline</i>
         <i class="large material-icons remove">remove_circle_outline</i>`;
     taskContainer.appendChild(taskItem);
     taskContainer.appendChild(taskFeatures);

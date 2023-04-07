@@ -1,7 +1,7 @@
 import { renderTasks } from "./renderTasks";
 import { projectTasks, projects } from "./tasks";
 import { createProjects } from "./projects";
-import { renderTaskModal } from "./renderForms";
+import { renderTaskModal, renderWatchTask } from "./renderForms";
 
 
 export const renderProjects = (proyecto) => {
@@ -17,10 +17,17 @@ export const renderProjects = (proyecto) => {
   taskContainers.forEach((taskContainer, index) => {
     const item = taskContainer.querySelector(".item-2");
     const removeButton = item.querySelector(".remove");
+
     removeButton.addEventListener("click", () => {
       projectTasks(proyecto).removeTask(index);
       renderProjects(proyecto);
     });
+    const watchButton = item.querySelector('.watch');
+    watchButton.addEventListener('click', () => {
+      console.log(projectTasks(proyecto).watchTask(index));
+      const currentTask = projectTasks(proyecto).watchTask(index)
+      renderWatchTask(currentTask);
+    })
   });
 };
 
