@@ -1,7 +1,7 @@
 import { renderTasks } from "./renderTasks";
 import { projectTasks, projects } from "./tasks";
 import { createProjects } from "./projects";
-import { renderTaskModal, renderWatchTask } from "./renderForms";
+import { renderEditTask, renderTaskModal, renderWatchTask } from "./renderForms";
 
 
 export const renderProjects = (proyecto) => {
@@ -27,7 +27,13 @@ export const renderProjects = (proyecto) => {
       console.log(projectTasks(proyecto).watchTask(index));
       const currentTask = projectTasks(proyecto).watchTask(index)
       renderWatchTask(currentTask);
-    })
+    });
+
+    const editButton = item.querySelector('.edit');
+    editButton.addEventListener('click', () => {
+      const currentTask = projectTasks(proyecto).watchTask(index)
+      renderEditTask(currentTask, proyecto);
+    });
   });
 };
 
