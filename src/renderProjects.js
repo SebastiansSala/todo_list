@@ -1,8 +1,11 @@
 import { renderTasks } from "./renderTasks";
 import { projectTasks, projects } from "./tasks";
 import { createProjects } from "./projects";
-import { renderEditTask, renderTaskModal, renderWatchTask } from "./renderForms";
-
+import {
+  renderEditTask,
+  renderTaskModal,
+  renderWatchTask,
+} from "./renderForms";
 
 export const renderProjects = (proyecto) => {
   const main = document.querySelector(".main");
@@ -22,16 +25,16 @@ export const renderProjects = (proyecto) => {
       projectTasks(proyecto).removeTask(index);
       renderProjects(proyecto);
     });
-    const watchButton = item.querySelector('.watch');
-    watchButton.addEventListener('click', () => {
+    const watchButton = item.querySelector(".watch");
+    watchButton.addEventListener("click", () => {
       console.log(projectTasks(proyecto).watchTask(index));
-      const currentTask = projectTasks(proyecto).watchTask(index)
+      const currentTask = projectTasks(proyecto).watchTask(index);
       renderWatchTask(currentTask);
     });
 
-    const editButton = item.querySelector('.edit');
-    editButton.addEventListener('click', () => {
-      const currentTask = projectTasks(proyecto).watchTask(index)
+    const editButton = item.querySelector(".edit");
+    editButton.addEventListener("click", () => {
+      const currentTask = projectTasks(proyecto).watchTask(index);
       renderEditTask(currentTask, proyecto);
     });
   });
@@ -49,9 +52,9 @@ export const renderProject = () => {
   renderProjects(proyectoTasks);
 
   const add = document.querySelector(".add");
-      add.addEventListener("click", () => {
-        renderTaskModal(proyectoTasks);
-    });
+  add.addEventListener("click", () => {
+    renderTaskModal(proyectoTasks);
+  });
 
   createProject.addEventListener("click", () => {
     const modalContainer = document.createElement("div");
@@ -90,8 +93,8 @@ export const renderProject = () => {
       } else {
         const currentProject = createProjects(name);
         nameInput.value = "";
-        const projects = document.querySelector(".list-group");
-        projects.appendChild(currentProject);
+        const projectsList = document.querySelector(".list-group");
+        projectsList.appendChild(currentProject);
         currentProject.addEventListener("click", () => {
           proyectoTasks = currentProject;
           renderProjects(proyectoTasks);
@@ -113,5 +116,4 @@ export const renderProject = () => {
       renderProjects(proyectoTasks);
     });
   });
-
 };

@@ -116,6 +116,7 @@ export const renderEditTask = (task, currentProject) => {
       task.desc = desc;
       task.date = date;
       task.importance = priorityImportant;
+      localStorage.setItem('projects', JSON.stringify(projects));
       renderProjects(currentProject);
       modal.hide();
     }
